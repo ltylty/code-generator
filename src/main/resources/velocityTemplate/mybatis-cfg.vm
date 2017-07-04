@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+        <typeAlias alias="${className}" type="com.wistron.swpc.${sysName}.${moudleName}.model.${className}"/>
+        #if($isMulti)
+		<typeAlias alias="${className}PK" type="com.wistron.swpc.${sysName}.${moudleName}.model.${className}PK"/>
+		#end
+	</typeAliases>
+	
+	<plugins>
+		<!-- 指定数据库分页方言Dialect-->
+		<plugin interceptor="com.wistron.swpc.acs.framework.plugin.OffsetLimitInterceptor">
+			<property name="dialectClass" value="com.wistron.swpc.framework.jdbc.dialect.MySQLDialect"/>
+		</plugin>
+	</plugins>
+</configuration>

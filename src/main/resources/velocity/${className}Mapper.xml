@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://www.ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.enableets.edu.${moudleName}.framework.dao.${className}Dao">
+	<sql id="select_clause">
+		select
+	#foreach($_pk in $pks)
+			$_pk.fieldOriginal as $_pk.lowerCaseFieldCol,
+	#end
+	#foreach($pro in $propertys)
+	#if(${velocityCount} == $propertys.size() - 1)
+			$pro.fieldOriginal as $pro.lowerCaseFieldCol
+	#else
+			$pro.fieldOriginal as $pro.lowerCaseFieldCol,
+	#end
+	#end      
+		from 
+			$tblName
+	</sql>
+	
+	<sql id="where_clause">
+		<where>
+			#foreach($pro in $propertys)
+			#if(${pro.typeCol}=="java.lang.String")
+			<if test="${pro.lowerCaseFieldCol} != null and ${pro.lowerCaseFieldCol} !=''" >
+					and ${pro.fieldOriginal} = #{${pro.lowerCaseFieldCol}}
+			</if>
+			#else
+			<if test="${pro.lowerCaseFieldCol} != null" >
+					and ${pro.fieldOriginal} = #{${pro.lowerCaseFieldCol}}
+			</if>
+			#end
+			#end
+		</where>
+	</sql>
+
+</mapper>

@@ -1,0 +1,15 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="${moudleName}" extends="gloab-package" namespace="/${moudleName}">
+		<action name="*" class="{1}Action">
+			<result name="list">/jsp/${moudleName}/{1}/{1}List.jsp</result>
+			<result name="query" type="redirect">/${moudleName}/{1}!query.so?pager.requestType=3</result>
+			<result name="add">/jsp/${moudleName}/{1}/{1}Edit.jsp</result>
+			<result name="edit">/jsp/${moudleName}/{1}/{1}Edit.jsp</result>
+			<result name="detail">/jsp/${moudleName}/{1}/{1}Edit.jsp</result>
+		</action>
+	</package>
+</struts>
+

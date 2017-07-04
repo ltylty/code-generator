@@ -1,0 +1,76 @@
+<%@ page contentType="text/html;charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/jsp/controlHead.jsp" %>
+<html>
+<head>
+<script type="text/javascript" src="<%=scriptPath%>/sheetWidth.js"></script>
+	<title><s:text name="${title_name}.title" /></title>
+</head>
+<script type="text/javascript">
+	function goSave() {
+		var actionFlag=<s:text name="actionFlag" />;
+		if(actionFlag=="0"){
+			if(!checkform(document.${objName}Form)){
+				return;
+			}
+			document.${objName}Form.action="<s:url action="${objName}!add.so" namespace="/${nameSpace}" encode="true"/>";
+		}else if(actionFlag=="1"){
+			if(!checkform(document.${objName}Form)){
+				return;
+			}
+			document.${objName}Form.action="<s:url action="${objName}!edit.so" namespace="/${nameSpace}" encode="true"/>";
+		}else if(actionFlag=="2"){
+			document.${objName}Form.action="<s:url action="${objName}!remove.so" namespace="/${nameSpace}" encode="true"/>";
+		}
+		document.${objName}Form.submit();
+	}
+	function goBack() {
+		window.close();
+	}
+</script>
+<body>
+<s:form method="post" theme="simple" action="${objName}!add" namespace="/${nameSpace}" name="${formName}Form" id="${formName}">
+	
+	<div id="mainbody">
+		<div id="search">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		#foreach($_pk in $pks)
+		<tr>
+			<td><span class="require"><s:text name="program" /></span></td>
+			<td>
+				<s:if test="actionFlag==0">
+					<s:textfield id="${objName}.id.${_pk.lowerCaseFieldCol}" name="${objName}.id.${_pk.lowerCaseFieldCol}" cssClass="inputBox not-null:true"/>
+				</s:if>
+				<s:else>
+					<s:property value="${objName}.id.${_pk.lowerCaseFieldCol}"/>
+					<s:hidden name="${objName}.id.${_pk.lowerCaseFieldCol}"></s:hidden>
+				</s:else>
+			</td>
+		</tr>
+		#end
+		#foreach($pro in $propertys)
+		<tr>
+			<td><span <s:if test="actionFlag==0 || actionFlag==1">class="require"</s:if>><s:text name="${objName}.${pro.lowerCaseFieldCol}" /></span></td>
+			<td>
+			<s:if test="actionFlag==0 || actionFlag==1">
+			<s:textfield name="${objName}.${pro.lowerCaseFieldCol}" id="${objName}.${pro.lowerCaseFieldCol}" cssClass="inputBox not-null:true" maxLength="50"></s:textfield>
+			</s:if>
+			<s:else>
+			<s:property value="${objName}.${pro.lowerCaseFieldCol}"/>
+			</s:else>
+			</td>
+		</tr>
+		#end
+		
+		</table>
+		</div>
+		<s:if test="actionFlag==0||actionFlag==1">
+			<input type="button" class="buttonOK" value="<s:text name="btn_ok" />" onclick="goSave()"/>
+		</s:if>
+		<s:if test="actionFlag==2" >
+			<input type="button" class="buttonOK" value="<s:text name="btn_del" />" onclick="goSave()"/>
+		</s:if>
+		<input type="button" class="buttonCancel" value="<s:text name="btn_cancel" />" onclick="goBack()"/>
+	</div>	
+</s:form>
+</body>
+</html>

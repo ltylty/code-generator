@@ -1,0 +1,18 @@
+package com.wistron.swpc.${sysName}.${moudleName}.model;
+
+import java.io.Serializable;
+
+public class ${className}PK implements Serializable{
+	#foreach($var in $pks)
+	private $var.typeCol $var.lowerCaseFieldCol;
+	
+	public $var.typeCol get${var.UpperCaseFieldCol}()
+	{
+		return ${var.lowerCaseFieldCol};
+	}
+	public void set${var.UpperCaseFieldCol}($var.typeCol ${var.lowerCaseFieldCol})
+	{
+		this.${var.lowerCaseFieldCol}= ${var.lowerCaseFieldCol};
+	}
+	#end
+}

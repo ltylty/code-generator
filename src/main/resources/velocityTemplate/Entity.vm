@@ -1,0 +1,57 @@
+package com.wistron.swpc.${sysName}.${moudleName}.model;
+
+import com.wistron.swpc.${sysName}.framework.base.Entity;
+
+/**
+ * $tblName
+ */
+public class ${className} extends Entity {
+	#if(!$isMulti)
+	#foreach($_pk in $pks)
+	private $_pk.typeCol $_pk.lowerCaseFieldCol;
+	
+	public $_pk.typeCol get${_pk.UpperCaseFieldCol}() {
+		return $_pk.lowerCaseFieldCol;
+	}
+	
+	public void set${_pk.UpperCaseFieldCol}($_pk.typeCol $_pk.lowerCaseFieldCol) {
+		this.$_pk.lowerCaseFieldCol = $_pk.lowerCaseFieldCol;
+	}
+	
+	public Serializable getId() {
+		return (Serializable)$_pk.lowerCaseFieldCol;
+	}
+	#end
+	#end
+	#if($isMulti)
+	private ${className}PK identity = new ${className}PK();
+	
+	public Serializable getId() {
+		return (Serializable)identity;
+	}
+	
+	#foreach($_pk in $pks)
+	private $_pk.typeCol $_pk.lowerCaseFieldCol;
+	
+	public $_pk.typeCol get${_pk.UpperCaseFieldCol}() {
+		return $_pk.lowerCaseFieldCol;
+	}
+	
+	public void set${_pk.UpperCaseFieldCol}($_pk.typeCol $_pk.lowerCaseFieldCol) {
+		this.$_pk.lowerCaseFieldCol = $_pk.lowerCaseFieldCol;
+		this.identity.set${_pk.UpperCaseFieldCol}(this.$_pk.lowerCaseFieldCol);
+	}
+	#end	
+	#end
+	#foreach($s in $propertys)
+	private $s.typeCol $s.lowerCaseFieldCol;
+	
+	public $s.typeCol get${s.UpperCaseFieldCol}() {
+		return $s.lowerCaseFieldCol;
+	}
+	
+	public void set${s.UpperCaseFieldCol}($s.typeCol $s.lowerCaseFieldCol) {
+		this.$s.lowerCaseFieldCol = $s.lowerCaseFieldCol;
+	}
+	#end
+}

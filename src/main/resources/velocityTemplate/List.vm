@@ -1,0 +1,114 @@
+<%@ page contentType="text/html;charset=utf-8"%>
+<%@ include file="/jsp/controlHead.jsp" %>
+<html>
+<head>
+	<title><s:text name="${title_name}.title" /></title>
+	<script type="text/javascript" src="<%=scriptPath%>/jquery.treeTable.js"></script>
+</head>
+
+<script type="text/javascript">
+	//查詢
+	function goQuery() {
+		document.${objName}Form.submit();
+	}
+	//新增
+	function goAdd() {
+		openwin("<s:url action="${objName}!preAdd.so" namespace="/${nameSpace}" encode="true"/>", 600, 450);
+	}
+	
+	//修改
+	function goEdit() {
+		if(!checkSelect("${objName}Ids", document.${objName}Form))
+			return;
+		var url = "<s:url action="${objName}!preEdit.so" namespace="/${nameSpace}" encode="true"/>";
+		openwin("", 600,450, "${objName}Form");
+		var target = document.${objName}Form.target;
+		var action = document.${objName}Form.action;
+		document.${objName}Form.target = "${objName}Form";
+		document.${objName}Form.action = url;
+		document.${objName}Form.submit();
+		document.${objName}Form.target = target;
+		document.${objName}Form.action = action;
+	}
+
+	//詳細
+	function goDetail() {
+		if(!checkSelect("${objName}Ids", document.${objName}Form))
+			return;
+		var url = "<s:url action="${objName}!preDetail.so" namespace="/${nameSpace}" encode="true"/>";
+		openwin("", 600,450, "${objName}Form");
+		var target = document.${objName}Form.target;
+		var action = document.${objName}Form.action;
+		document.${objName}Form.target = "${objName}Form";
+		document.${objName}Form.action = url;
+		document.${objName}Form.submit();
+		document.${objName}Form.target = target;
+		document.${objName}Form.action = action;
+	}
+	
+	//刪除
+	function goRemove() {
+		if(!checkSelect("${objName}Ids", document.${objName}Form))
+			return;
+		var url = "<s:url action="${objName}!preRemove.so" namespace="/${nameSpace}" encode="true"/>";
+		openwin("", 600,450, "${objName}Form");
+		var target = document.${objName}Form.target;
+		var action = document.${objName}Form.action;
+		document.${objName}Form.target = "${objName}Form";
+		document.${objName}Form.action = url;
+		document.${objName}Form.submit();
+		document.${objName}Form.target = target;
+		document.${objName}Form.action = action;
+	}
+
+	$(document).ready(function() {
+
+		addButton('<input name="btnAdd" type="button" value="<s:text name="btn_add" />" class="buttonAdd" onclick="goAdd()"/>');
+		addButton('<input name="btnEdit" type="button" value="<s:text name="btn_edit" />" class="buttonEdit" onclick="goEdit()"/>');
+		addButton('<input name="btnDetail" type="button" value="<s:text name="btn_detail" />" class="buttonDetail" onclick="goDetail()"/>');
+		addButton('<input name="btnDel" type="button" value="<s:text name="btn_del" />" class="buttonBack" onclick="goRemove()"/>');
+	})
+</script>
+<body>
+<s:form method="post" theme="simple" action="${objName}!query" namespace="/${nameSpace}"  name="${objName}Form">
+<div id="mainbody" >
+	<div id="messagebox"></div>
+	<div id="mainContent">
+		<div id="search">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			#foreach($pro in $propertys)
+			<tr>		
+				<td><s:text name="${objName}.${pro.lowerCaseFieldCol}" /></td>
+				<td><s:textfield id="${objName}.${pro.lowerCaseFieldCol}" name="${objName}.${pro.lowerCaseFieldCol}" cssClass="inputBox" maxLength="20"/></td>
+				<td></td>
+				<td></td>
+			</tr>
+			#end
+			
+			</table>
+			<br style="clear:both;"/>
+		</div>
+		<div id="sheet">
+			<div class="result">
+				<wi:treeTable  id="${objName}s" name="${objName}s" treeColumn="3" useCookies="true" checkedAll="false" >
+					<wi:column titleKey="please_select" headerClass="dataCheckbox" inputType="radio" property="${radioPro}" name="${objName}Ids" align="center"/>
+					#if(${isMulti})
+					#foreach($_pk in $pks)
+					<wi:column titleKey="${objName}.${_pk.lowerCaseFieldCol}" property="id.${_pk.lowerCaseFieldCol}" width="10%"/>
+					#end
+					#else
+					#foreach($_pk in $pks)
+					<wi:column titleKey="${objName}.${objName}.${_pk.lowerCaseFieldCol}" property="${_pk.lowerCaseFieldCol}"  />
+					#end
+					#end
+					#foreach($pro in $propertys)
+					<wi:column titleKey="${objName}.${pro.lowerCaseFieldCol}" property="${pro.lowerCaseFieldCol}"/>
+					#end
+				</wi:treeTable>
+			</div>
+		</div>
+	</div>
+</div>
+</s:form>
+</body>
+</html>

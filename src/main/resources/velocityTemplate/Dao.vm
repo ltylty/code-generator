@@ -1,0 +1,26 @@
+package com.wistron.swpc.${sysName}.${moudleName}.dao;
+
+
+import java.util.List;
+
+import com.wistron.swpc.${sysName}.framework.web.PageObject;
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className};
+#if(${isMulti})
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className}PK;
+#end
+import com.wistron.swpc.framework.dao.EntityDao;
+
+
+public interface ${className}Dao extends EntityDao<${className}, ${typeName}>{
+
+	/**
+	 * 分页查询
+	 * @param po 分页
+	 * @return List<${className}>
+	 */
+	public List<${className}> get${className}s(PageObject po);
+	
+	
+
+}
+

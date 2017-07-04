@@ -1,0 +1,90 @@
+package com.wistron.swpc.${sysName}.${moudleName}.service.imp;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.wistron.swpc.${sysName}.core.common.CommDefine;
+import com.wistron.swpc.${sysName}.framework.base.BaseAcsService;
+import com.wistron.swpc.${sysName}.framework.exception.BusinessException;
+import com.wistron.swpc.${sysName}.framework.web.PageObject;
+import com.wistron.swpc.${sysName}.${moudleName}.dao.${className}Dao;
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className};
+#if(${isMulti})
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className}PK;
+#end
+import com.wistron.swpc.${sysName}.${moudleName}.service.${className}Service;
+import com.wistron.swpc.framework.dao.EntityDao;
+import com.wistron.swpc.sequence.ISeriableNumber;
+import com.wistron.swpc.sequence.util.Unique;
+
+
+@Service("${serviceName}Service")
+public class ${className}ServiceImpl  extends BaseAcsService<${className}, ${typeName}> implements ${className}Service{
+	@Autowired
+	private ${className}Dao ${paramName}Dao;
+
+	@Override
+	protected EntityDao getEntityDao() {
+		return ${paramName}Dao;
+	}
+	
+	public void add${className}(${className} ${paramName}) {
+	#if(${isMulti})
+	ISeriableNumber seq = Unique.getSequence(CommDefine.SEQ_PRIVILEGE);
+	${typeName} id = ${paramName}.getId();
+	id.set${className}Id(Long.toString(seq.getNextVal()));
+	#else
+	#foreach($_pk in $pks)
+	${className} validate${_pk.UpperCaseFieldCol}=(${className})${paramName}Dao.getById(${paramName}.get${_pk.UpperCaseFieldCol}());
+	if(validate${_pk.UpperCaseFieldCol} != null){
+		throw new BusinessException("app_id_repeat");
+	}
+	#end
+	#end
+		${paramName}Dao.save(${paramName});
+		
+	}
+	
+
+	public void delete${className}(${typeName} id) {
+		${className} ${paramName} = (${className}) ${paramName}Dao.getById(id);
+		if (${paramName} == null) {
+			throw new BusinessException("no_data");
+		}	
+		
+		${paramName}Dao.deleteById(id);
+	}
+		
+	
+	
+	public void edit${className}(${className} ${paramName}) {
+	#if(${isMulti})
+	${typeName} id = ${paramName}.getId();
+	${className} ${paramName}Tmp = (${className}) ${paramName}Dao.getById(id);
+	#else
+	#foreach($_pk in $pks)
+	${className} ${paramName}Tmp = (${className}) ${paramName}Dao.getById(${paramName}.get${_pk.UpperCaseFieldCol}());
+	#end
+	#end
+	if (${paramName}Tmp == null) {
+		throw new BusinessException("no_data");
+	}
+	${paramName}Dao.update(${paramName});
+		
+	}
+	
+
+	public ${className} get${className}(${typeName} id) {
+		${className} ${paramName} = (${className}) ${paramName}Dao.getById(id);
+		if (${paramName} == null) {
+			throw new BusinessException("no_data");
+		}
+		return ${paramName};
+	}
+
+	public List<${className}> get${className}s(PageObject po) {
+		return ${paramName}Dao.get${className}s(po);
+	}
+
+}

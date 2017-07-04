@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="${nameSpaceSql}">
+<sql id="select_clause">
+		select
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		#if(${velocityCount} == 0)
+		$_pk.fieldOriginal as "id.${_pk.lowerCaseFieldCol}"
+		#else
+		,$_pk.fieldOriginal as "id.${_pk.lowerCaseFieldCol}"
+		#end
+		#end
+		#else
+		#foreach($_pk in $pks)
+		$_pk.fieldOriginal as $_pk.lowerCaseFieldCol
+		#end
+		#end
+		#foreach($pro in $propertys)
+		,$pro.fieldOriginal as $pro.lowerCaseFieldCol
+		#end
+		from $tblName
+			
+	</sql>
+	
+	<sql id="where_clause">
+		<where>
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		<if test="id != null and id.${_pk.lowerCaseFieldCol} != null and id.${_pk.lowerCaseFieldCol} !=''" >
+				${_pk.fieldOriginal} = #{id.$_pk.lowerCaseFieldCol}
+		</if>
+		#end
+		#else
+		#foreach($_pk in $pks)
+		<if test="${_pk.lowerCaseFieldCol} != null and ${_pk.lowerCaseFieldCol} !=''" >
+				${_pk.fieldOriginal} = #{$_pk.lowerCaseFieldCol}
+		</if>
+		#end
+		#end
+		#foreach($pro in $propertys)
+		<if test="${pro.lowerCaseFieldCol} != null and ${pro.lowerCaseFieldCol} !=''" >
+				and ${pro.fieldOriginal} = #{${pro.lowerCaseFieldCol}}
+		</if>
+		#end
+		</where>
+	</sql>
+	
+	<select id="select" parameterType="${param_type}" resultType="${rltType}">
+		<include refid="select_clause"/>
+		<include refid="where_clause"/>
+	</select>
+	
+	<select id="getById" parameterType="${param_obj}" resultType="${rltType}">
+		select
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		#if(${velocityCount} == 0)
+		${_pk.fieldOriginal} as "id.${_pk.lowerCaseFieldCol}"
+		#else
+		,${_pk.fieldOriginal} as "id.${_pk.lowerCaseFieldCol}"
+		#end
+		#end
+		#else
+		#foreach($_pk in $pks)
+		${_pk.fieldOriginal} as ${_pk.lowerCaseFieldCol}
+		#end
+		#end
+		#foreach($pro in $propertys)
+		,${pro.fieldOriginal} as ${pro.lowerCaseFieldCol}
+		#end
+		from $tblName
+		where 
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		#if(${velocityCount} == 0)
+		${_pk.fieldOriginal} = #{id.${_pk.lowerCaseFieldCol}}
+		#else
+		 and ${_pk.fieldOriginal} = #{id.${_pk.lowerCaseFieldCol}}
+		#end
+		#end
+		#else
+		#foreach($_pk in $pks)
+		 and ${_pk.fieldOriginal} = #{${_pk.lowerCaseFieldCol}}
+		#end
+		#end
+	</select>
+	
+
+	<insert id="insert" parameterType="${param_type}">
+		insert into $tblName(
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		#if(${velocityCount} == 0)
+		${_pk.fieldOriginal}
+		#else
+		,${_pk.fieldOriginal}
+		#end
+		#end
+		#else
+		#foreach($_pk in $pks)
+		${_pk.fieldOriginal},
+		#end
+		#end
+		#foreach($pro in $propertys)
+		,${pro.fieldOriginal}
+		#end
+		)values(
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		#if(${velocityCount} == 0)
+		#{id.${_pk.lowerCaseFieldCol}}
+		#else
+		,#{id.${_pk.lowerCaseFieldCol}}
+		#end
+		#end
+		#else
+		#foreach($_pk in $pks)
+		#{${_pk.lowerCaseFieldCol}},
+		#end
+		#end
+		#foreach($pro in $propertys)
+		,#{${pro.lowerCaseFieldCol}}
+		#end
+		)
+	</insert>
+	
+	<update id="update" parameterType="${param_type}">
+		update $tblName set 
+		#foreach($pro in $propertys)
+		#if(${velocityCount} == 0)
+		${pro.fieldOriginal} = #{${pro.lowerCaseFieldCol}}
+		#else
+		,${pro.fieldOriginal} = #{${pro.lowerCaseFieldCol}}
+		#end
+		#end
+		where
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		#if(${velocityCount} == 0)
+		${_pk.fieldOriginal} = #{id.${_pk.lowerCaseFieldCol}}
+		#else
+		 and ${_pk.fieldOriginal} = #{id.${_pk.lowerCaseFieldCol}}
+		#end
+		#end
+		#else
+		#foreach($_pk in $pks)
+		${_pk.fieldOriginal} = #{${_pk.lowerCaseFieldCol}}
+		#end
+		#end	
+	</update>
+	
+	<delete id="deleteById" parameterType="${param_obj}">
+		delete from $tblName
+		where
+		#if($isMulti)
+		#foreach($_pk in $pks)
+		#if(${velocityCount} == 0)
+		${_pk.fieldOriginal} = #{id.${_pk.lowerCaseFieldCol}}
+		#else
+		 and ${_pk.fieldOriginal} = #{id.${_pk.lowerCaseFieldCol}}
+		#end
+		#end
+		#else
+		#foreach($_pk in $pks)
+		${_pk.fieldOriginal} = #{${_pk.lowerCaseFieldCol}}
+		#end
+		#end
+	</delete>
+</mapper>

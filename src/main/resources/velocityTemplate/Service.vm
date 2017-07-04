@@ -1,0 +1,47 @@
+package com.wistron.swpc.${sysName}.${moudleName}.service;
+
+import java.util.List;
+
+import com.wistron.swpc.${sysName}.framework.web.PageObject;
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className};
+#if(${isMulti})
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className}PK;
+#end
+
+
+public interface ${className}Service {
+
+	/**
+	 * 
+	 * @param po PageObject 分頁信息
+	 * @return List<${className}> 
+	 */
+	public List<${className}> get${className}s(PageObject po);
+	
+	/**
+	 * 
+	 * @param ${paramName} ${className}
+	 * @return boolean true:新增成功false:新增失敗
+	 */
+	public void add${className}(${className} ${paramName});
+	
+	/**
+	 * 
+	 * @param id ${typeName}
+	 * @return ${className} 
+	 */
+	public ${className} get${className}(${typeName} id);
+	
+	/**
+	 * 
+	 * @param ${className} ${className} 
+	 */
+	public void edit${className}(${className} ${paramName});
+	
+	/**
+	 * 
+	 * @param id ${typeName}
+	 */
+	public void delete${className}(${typeName} id);
+	
+}

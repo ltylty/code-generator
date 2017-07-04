@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://www.ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.enableets.edu.learning.framework.dao.ActivityInfoDao">
+	<sql id="select_clause">
+		select
+			activity_id as activityId,
+			activity_name as activityName,
+			activity_status as activityStatus,
+			activity_type as activityType,
+			grade_id as gradeId,
+			grade_name as gradeName,
+			subject_id as subjectId,
+			subject_name as subjectName,
+			school_type_code as schoolTypeCode,
+			activity_description as activityDescription,
+			creator as creator,
+			create_time as createTime,
+			updator as updator
+			update_time as updateTime,
+		from 
+			learning_activity_info
+	</sql>
+	
+	<sql id="where_clause">
+		<where>
+			<if test="activityName != null and activityName !=''" >
+					and activity_name = #{activityName}
+			</if>
+			<if test="activityStatus != null and activityStatus !=''" >
+					and activity_status = #{activityStatus}
+			</if>
+			<if test="activityType != null and activityType !=''" >
+					and activity_type = #{activityType}
+			</if>
+			<if test="gradeId != null and gradeId !=''" >
+					and grade_id = #{gradeId}
+			</if>
+			<if test="gradeName != null and gradeName !=''" >
+					and grade_name = #{gradeName}
+			</if>
+			<if test="subjectId != null and subjectId !=''" >
+					and subject_id = #{subjectId}
+			</if>
+			<if test="subjectName != null and subjectName !=''" >
+					and subject_name = #{subjectName}
+			</if>
+			<if test="schoolTypeCode != null and schoolTypeCode !=''" >
+					and school_type_code = #{schoolTypeCode}
+			</if>
+			<if test="activityDescription != null and activityDescription !=''" >
+					and activity_description = #{activityDescription}
+			</if>
+			<if test="creator != null and creator !=''" >
+					and creator = #{creator}
+			</if>
+			<if test="createTime != null" >
+					and create_time = #{createTime}
+			</if>
+			<if test="updator != null and updator !=''" >
+					and updator = #{updator}
+			</if>
+			<if test="updateTime != null" >
+					and update_time = #{updateTime}
+			</if>
+		</where>
+	</sql>
+
+</mapper>

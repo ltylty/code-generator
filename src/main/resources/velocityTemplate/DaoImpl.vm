@@ -1,0 +1,33 @@
+package com.wistron.swpc.${sysName}.${moudleName}.dao.mysql;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.wistron.swpc.${sysName}.framework.base.BaseAcsDao;
+import com.wistron.swpc.${sysName}.framework.web.PageObject;
+import com.wistron.swpc.${sysName}.${moudleName}.dao.${className}Dao;
+import com.wistron.swpc.${sysName}.${moudleName}.model.$className;
+#if(${isMulti})
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className}PK;
+#end
+
+@Repository("${daoName}Dao")
+public class ${className}DaoImpl extends BaseAcsDao<$className, ${typeName}> implements
+		${className}Dao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public Class getEntityClass() {
+		
+		return ${className}.class;
+	}
+	/**
+	 * 分页查询
+	 * @param po 分页模型
+	 * @return List<$className>
+	 */
+	public List<$className> get${className}s(PageObject po){
+		po.setSelectStatement("${className}.select");
+		return (List<$className>)this.selectList(po);
+	}
+}

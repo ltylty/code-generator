@@ -1,0 +1,199 @@
+package com.wistron.swpc.${sysName}.${moudleName}.action;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.wistron.swpc.${sysName}.framework.base.AcsAction;
+import com.wistron.swpc.${sysName}.framework.web.PageObject;
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className};
+#if(${isMulti})
+import com.wistron.swpc.${sysName}.${moudleName}.model.${className}PK;
+#end
+import com.wistron.swpc.${sysName}.${moudleName}.service.${className}Service;
+
+
+@Controller
+@Scope("prototype")
+public class ${className}Action extends AcsAction{
+	#if(!$isMulti)
+	private static final long serialVersionUID = 1L;
+	#end
+	@Autowired
+	private ${className}Service ${paramName}Service;
+	private ${className} ${paramName};
+	private List<${className}> ${paramName}s;
+	private List<String> ${paramName}Ids;
+
+
+	public String query() {
+		po = this.getPageObject();
+		if (po.getExeQuery()) {
+	    	${paramName}s = ${paramName}Service.get${className}s(po);
+		}
+		return LIST;
+	}
+
+	public String preEdit() {
+		setActionFlag(ACTION_FLAG_EDIT);	
+		String[] arr = ${paramName}Ids.get(0).split(",");
+		#if(${isMulti})
+		${typeName} id = new ${typeName}();
+		#foreach($_pk in $pks)
+		id.set${_pk.UpperCaseFieldCol}(arr[$velocityCount]);
+		#end
+		${paramName} = ${paramName}Service.get${className}(id);
+		#else
+		${paramName} = ${paramName}Service.get${className}(
+		#foreach($_pk in $pks)
+		#if(${_pk.typeCol} == "java.lang.Long")
+		Long.parseLong(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Integer")
+		Integer.parseInt(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Float")
+		Float.parseFloat(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Double")
+		Double.parseDouble(arr[0])
+		#else 
+		   arr[0]
+		#end
+		#end
+		);
+		#end	
+		return EDIT;
+	}
+
+	public String preDetail() {
+		setActionFlag(ACTION_FLAG_DETAIL);
+		String[] arr = ${paramName}Ids.get(0).split(",");
+		#if($isMulti)
+		${typeName} id = new ${typeName}();
+		
+		#foreach($_pk in $pks)
+		id.set${_pk.UpperCaseFieldCol}(arr[$velocityCount]);
+		#end
+		${paramName} = ${paramName}Service.get${className}(id);	
+		#else
+		${paramName} = ${paramName}Service.get${className}(
+		#foreach($_pk in $pks)
+		#if(${_pk.typeCol} == "java.lang.Long")
+		Long.parseLong(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Integer")
+		Integer.parseInt(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Float")
+		Float.parseFloat(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Double")
+		Double.parseDouble(arr[0])
+		#else 
+		   arr[0]
+		#end
+		#end
+		);
+		#end
+		return EDIT;
+	}
+
+	public String preRemove() {
+		setActionFlag(ACTION_FLAG_DEL);
+		String[] arr = ${paramName}Ids.get(0).split(",");
+		#if(${isMulti})
+		${typeName} id = new ${typeName}();
+		#foreach($_pk in $pks)
+		id.set${_pk.UpperCaseFieldCol}(arr[$velocityCount]);
+		#end
+		${paramName} = ${paramName}Service.get${className}(id);
+		#else
+		${paramName} = ${paramName}Service.get${className}(
+		#foreach($_pk in $pks)
+		#if(${_pk.typeCol} == "java.lang.Long")
+		Long.parseLong(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Integer")
+		Integer.parseInt(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Float")
+		Float.parseFloat(arr[0])
+		#elseif(${_pk.typeCol} == "java.lang.Double")
+		Double.parseDouble(arr[0])
+		#else 
+		   arr[0]
+		#end
+		#end
+		);
+		#end
+		return EDIT;
+	}
+
+	public String add() {
+		${paramName}Service.add${className}(${paramName});
+		return SUCCESS;
+	}
+
+	public String edit() {
+		${paramName}Service.edit${className}(${paramName});
+		return SUCCESS;
+	}
+
+	public String remove() {
+		#if($isMulti)
+		${paramName}Service.delete${className}(${paramName}.getId());
+		#else
+		#foreach($_pk in $pks)
+		${paramName}Service.delete${className}(${paramName}.get${_pk.UpperCaseFieldCol}());
+		#end
+		#end
+		return SUCCESS;
+	}
+
+	protected PageObject getPageObject() {
+		po = super.getPageObject();
+		if (${paramName}!= null) {
+			po.setCondition(${paramName});
+		} else {
+			${paramName} = po.getCondition();
+		}
+		return po;
+	}
+
+	/**
+	 * @return the ${paramName}
+	 */
+	public ${className} get${className}() {
+		return ${paramName};
+	}
+
+	/**
+	 * @param ${paramName} the ${paramName} to set
+	 */
+	public void set${className}(${className} ${paramName}) {
+		this.${paramName} = ${paramName};
+	}
+
+	/**
+	 * @return the ${paramName}s
+	 */
+	public List<${className}> get${className}s() {
+		return ${paramName}s;
+	}
+
+	/**
+	 * @param ${paramName}s the ${paramName}s to set
+	 */
+	public void set${className}s(List<${className}> ${paramName}s) {
+		this.${paramName}s = ${paramName}s;
+	}
+
+	/**
+	 * @return the ${paramName}Ids
+	 */
+	public List<String> get${className}Ids() {
+		return ${paramName}Ids;
+	}
+
+	/**
+	 * @param ${paramName}Ids the ${paramName}Ids to set
+	 */
+	public void set${className}Ids(List<String> ${paramName}Ids) {
+		this.${paramName}Ids = ${paramName}Ids;
+	}
+}
