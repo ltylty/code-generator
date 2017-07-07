@@ -78,28 +78,28 @@ public class UtilTool {
 	 */
 	private static String parseType(String typeCol) {
 		if(match(typeCol,new String[]{"VARCHAR","CHAR","TEXT"})){
-			return "java.lang.String";
+			return "String";
 		}
 		if(match(typeCol,new String[]{"BLOB"})){
-			return "java.lang.byte[]";
+			return "byte[]";
 		}
 		if(match(typeCol,new String[]{"INTEGER","INT"})){
-			return "java.lang.Long";
+			return "Long";
 		}
 		if(match(typeCol,new String[]{"TINYINT","SMALLINT","MEDIUMINT"})){
-			return "java.lang.Integer";
+			return "Integer";
 		}
 		if(match(typeCol,new String[]{"BIT"})){
-			return "java.lang.Boolean";
+			return "Boolean";
 		}
 		if(match(typeCol,new String[]{"BIGINT"})){
-			return "java.math.BigInteger";
+			return "BigInteger";
 		}
 		if(match(typeCol,new String[]{"FLOAT"})){
-			return "java.lang.Float";
+			return "Float";
 		}
 		if(match(typeCol,new String[]{"DOUBLE","NUMERIC"})){
-			return "java.lang.Double";
+			return "Double";
 		}
 		if(match(typeCol,new String[]{"DECIMAL"})){
 			return "java.math.BigDecimal";
@@ -113,7 +113,7 @@ public class UtilTool {
 		if(match(typeCol,new String[]{"DATETIME","TIMESTAMP"})){
 			return "java.util.Date";
 		}
-		return "java.lang.String";
+		return "String";
 	}
 
 	/**
