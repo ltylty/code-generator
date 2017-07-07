@@ -6,7 +6,6 @@ import com.enableets.edu.${moudleName}.framework.po.${className}PO;
 /**
  * ${tblName} Dao层
  */
-public interface ${className}Dao  extends BaseDao<${className}PO>  {
+public interface ${className}Dao extends BaseDao<${className}PO> {
 	
-
 }

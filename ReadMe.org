@@ -1,0 +1,1 @@
+修改config.properties中的配置,执行WirteIntoFile.java中的main方法.生成对应的bo,po,controller,service,dao,mapper.

@@ -12,5 +12,4 @@ import com.enableets.edu.${moudleName}.microservice.bo.${className}BO;
 @Service
 public class ${className}Service extends ServiceAdapter<${className}BO, ${className}PO> {	
 	
-
 }
