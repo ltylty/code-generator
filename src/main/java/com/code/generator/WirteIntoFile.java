@@ -1,4 +1,4 @@
-package com;
+package com.code.generator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,10 +20,10 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import com.util.CommonVars;
-import com.util.JDBCUtils;
-import com.util.PropertyVo;
-import com.util.TableVo;
+import com.code.generator.util.CommonVars;
+import com.code.generator.util.JDBCUtils;
+import com.code.generator.util.PropertyVo;
+import com.code.generator.util.TableVo;
 
 public class WirteIntoFile {
 	// 初始化参数缓存
@@ -238,7 +238,7 @@ public class WirteIntoFile {
 					Properties properties = new Properties();
 					//properties.setProperty("directive.foreach.counter.initial.value", "0");
 					properties.setProperty("resource.loader", "srl");
-					properties.setProperty("srl.resource.loader.class", "com.util.MyResourceLoader");
+					properties.setProperty("srl.resource.loader.class", "com.code.generator.util.MyResourceLoader");
 					ve.init(properties);
 					//ve.init("velocity.properties");
 					Template fileContextTemplate = ve.getTemplate(readFile(

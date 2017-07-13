@@ -1,14 +1,22 @@
 package com.enableets.edu.${moudleName}.microservice.bo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * ${tblName}
  */
+@JsonInclude(JsonInclude.Include.NON_NULL) 
+@ApiModel
 public class ${className}BO {
 	
 	#foreach($_pk in $pks)
 	/**
 	 * $_pk.lowerCaseFieldCol
 	 */	
+	@ApiModelProperty(hidden = false)
 	private $_pk.typeCol $_pk.lowerCaseFieldCol;
 
 	#end
@@ -16,6 +24,7 @@ public class ${className}BO {
 	/**
 	 * $s.lowerCaseFieldCol
 	 */	
+	@ApiModelProperty(hidden = false)
 	private $s.typeCol $s.lowerCaseFieldCol;
 
 	#end

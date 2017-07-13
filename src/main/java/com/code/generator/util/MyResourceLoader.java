@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.util;
+package com.code.generator.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

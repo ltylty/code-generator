@@ -1,4 +1,4 @@
-package com.util;
+package com.code.generator.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
