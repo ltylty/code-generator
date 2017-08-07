@@ -7,7 +7,7 @@
 			$_pk.fieldOriginal as $_pk.lowerCaseFieldCol,
 	#end
 	#foreach($pro in $propertys)
-	#if(${velocityCount} == $propertys.size() - 1)
+	#if(${velocityCount} == $propertys.size())
 			$pro.fieldOriginal as $pro.lowerCaseFieldCol
 	#else
 			$pro.fieldOriginal as $pro.lowerCaseFieldCol,

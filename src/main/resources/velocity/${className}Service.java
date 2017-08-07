@@ -18,13 +18,17 @@ public class ${className}Service extends ServiceAdapter<${className}BO, ${classN
 
 	protected ${className}PO translatePO(${className}BO bo) {
 		${className}PO po = new ${className}PO();
-		BeanUtils.copyProperties(bo, po);
+		if(bo != null) {
+			BeanUtils.copyProperties(bo, po);
+		}
 		return po;
 	}
 	
 	protected ${className}BO translateBO(${className}PO po) {
 		${className}BO bo = new ${className}BO();
-		BeanUtils.copyProperties(po, bo);
+		if(po != null) {
+			BeanUtils.copyProperties(po, bo);
+		}
 		return bo;
 	}
 	
