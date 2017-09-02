@@ -1,15 +1,19 @@
-package com.enableets.edu.${moudleName}.framework.bo;
+package com.enableets.edu.${moudleName}.microservice.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ${tblName}
  */
-public class ${className}BO {
+@ApiModel
+public class ${className}VO {
 	
 	#foreach($_pk in $pks)
 	/**
 	 * $_pk.lowerCaseFieldCol
 	 */	
+	@ApiModelProperty
 	private $_pk.typeCol $_pk.lowerCaseFieldCol;
 
 	#end
@@ -17,6 +21,7 @@ public class ${className}BO {
 	/**
 	 * $s.lowerCaseFieldCol
 	 */	
+	@ApiModelProperty
 	private $s.typeCol $s.lowerCaseFieldCol;
 
 	#end
