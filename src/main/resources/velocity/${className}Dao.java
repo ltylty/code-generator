@@ -4,7 +4,8 @@ import com.enableets.edu.framework.core.dao.BaseDao;
 import com.enableets.edu.${moudleName}.framework.po.${className}PO;
 
 /**
- * ${tblName} Dao层
+ * @author toy_liu@enable-ets.com
+ * ${currDate}
  */
 public interface ${className}Dao extends BaseDao<${className}PO> {
 	

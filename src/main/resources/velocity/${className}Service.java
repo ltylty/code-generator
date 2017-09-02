@@ -11,7 +11,8 @@ import com.enableets.edu.${moudleName}.framework.po.${className}PO;
 import com.enableets.edu.${moudleName}.microservice.bo.${className}BO;
 
 /**
- * ${tblName} Service层
+ * @author toy_liu@enable-ets.com
+ * ${currDate}
  */
 @Service
 public class ${className}Service extends ServiceAdapter<${className}BO, ${className}PO> {	

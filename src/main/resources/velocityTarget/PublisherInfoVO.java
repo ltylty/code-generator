@@ -1,10 +1,11 @@
-package com.enableets.edu.textbook.microservice.bo;
+package com.enableets.edu.textbook.microservice.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * publisher_info
+ * @author toy_liu@enable-ets.com
+ * 2017/09/02
  */
 @ApiModel
 public class PublisherInfoVO {

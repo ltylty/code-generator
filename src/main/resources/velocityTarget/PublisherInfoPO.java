@@ -6,7 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * publisher_info
+ * @author toy_liu@enable-ets.com
+ * 2017/09/02
  */
 @Entity
 @Table(name = "publisher_info")

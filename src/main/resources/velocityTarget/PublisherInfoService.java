@@ -11,7 +11,8 @@ import com.enableets.edu.textbook.framework.po.PublisherInfoPO;
 import com.enableets.edu.textbook.microservice.bo.PublisherInfoBO;
 
 /**
- * publisher_info Service层
+ * @author toy_liu@enable-ets.com
+ * 2017/09/02
  */
 @Service
 public class PublisherInfoService extends ServiceAdapter<PublisherInfoBO, PublisherInfoPO> {	

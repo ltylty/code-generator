@@ -1,8 +1,8 @@
 package com.enableets.edu.textbook.framework.bo;
 
-
 /**
- * publisher_info
+ * @author toy_liu@enable-ets.com
+ * 2017/09/02
  */
 public class PublisherInfoBO {
 	

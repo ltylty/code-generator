@@ -1,8 +1,8 @@
 package com.enableets.edu.${moudleName}.framework.bo;
 
-
 /**
- * ${tblName}
+ * @author toy_liu@enable-ets.com
+ * ${currDate}
  */
 public class ${className}BO {
 	

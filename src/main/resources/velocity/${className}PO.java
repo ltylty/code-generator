@@ -6,7 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * ${tblName}
+ * @author toy_liu@enable-ets.com
+ * ${currDate}
  */
 @Entity
 @Table(name = "${tblName}")

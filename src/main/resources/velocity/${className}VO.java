@@ -4,7 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * ${tblName}
+ * @author toy_liu@enable-ets.com
+ * ${currDate}
  */
 @ApiModel
 public class ${className}VO {
