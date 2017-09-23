@@ -41,6 +41,7 @@ public class UtilTool {
 			temp.setExtraCol(po.getExtraCol());
 			temp.setKeyCol(po.getKeyCol());
 			temp.setNullCol(po.getNullCol());
+			temp.setComment(po.getComment());
 			
 			if(po.getKeyCol()!=null && po.getKeyCol().trim().toUpperCase().equals("PRI")){
 				pkCols.add(temp);

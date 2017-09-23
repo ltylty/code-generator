@@ -8,14 +8,14 @@ public class ${className}BO {
 	
 	#foreach($_pk in $pks)
 	/**
-	 * $_pk.lowerCaseFieldCol
+	 * $_pk.comment
 	 */	
 	private $_pk.typeCol $_pk.lowerCaseFieldCol;
 
 	#end
 	#foreach($s in $propertys)
 	/**
-	 * $s.lowerCaseFieldCol
+	 * $s.comment
 	 */	
 	private $s.typeCol $s.lowerCaseFieldCol;
 

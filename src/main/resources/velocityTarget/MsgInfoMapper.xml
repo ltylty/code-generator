@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://www.ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.enableets.edu.message.framework.dao.MsgInfoDao">
+	<sql id="select_clause">
+		select
+			msg_id as msgId,
+			sender as sender,
+			sender_user_id as senderUserId,
+			recipients as recipients,
+			subject as subject,
+			charset as charset,
+			content_type as contentType,
+			body as body,
+			creator as creator,
+			create_time as createTime,
+			updator as updator,
+			update_time as updateTime
+		from 
+			msg_info
+	</sql>
+	
+	<sql id="where_clause">
+		<where>
+			<if test="sender != null" >
+					and sender = #{sender}
+			</if>
+			<if test="senderUserId != null" >
+					and sender_user_id = #{senderUserId}
+			</if>
+			<if test="recipients != null" >
+					and recipients = #{recipients}
+			</if>
+			<if test="subject != null" >
+					and subject = #{subject}
+			</if>
+			<if test="charset != null" >
+					and charset = #{charset}
+			</if>
+			<if test="contentType != null" >
+					and content_type = #{contentType}
+			</if>
+			<if test="body != null" >
+					and body = #{body}
+			</if>
+			<if test="creator != null" >
+					and creator = #{creator}
+			</if>
+			<if test="createTime != null" >
+					and create_time = #{createTime}
+			</if>
+			<if test="updator != null" >
+					and updator = #{updator}
+			</if>
+			<if test="updateTime != null" >
+					and update_time = #{updateTime}
+			</if>
+		</where>
+	</sql>
+
+</mapper>

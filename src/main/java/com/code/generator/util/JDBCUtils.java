@@ -47,26 +47,29 @@ public final class JDBCUtils {
     public static TableVo getMysqlTableColsByJDBC(String tableName) throws Exception {
         Connection conn = null;
         Statement st = null;
-        ResultSet rs = null;
+        ResultSet rs1 = null;
+        ResultSet rs2 = null;
 
         try {
             conn = JDBCUtils.getConnection();
             st = conn.createStatement();
-            rs = st.executeQuery("SELECT table_name FROM information_schema.TABLES WHERE table_name ='"+tableName+"';");
+            rs1 = st.executeQuery("SELECT table_name FROM information_schema.TABLES WHERE table_name ='"+tableName+"';");
             List<PropertyVo> list =null;
-            if(rs.next()){
+            if(rs1.next()){
             	if(list == null){
             		list = new ArrayList<PropertyVo>();
             	}
-            	rs = st.executeQuery("DESCRIBE "+tableName);
-            	while (rs.next()) {
-                    list.add(new PropertyVo(tableName,rs.getObject(1),rs.getObject(2),rs.getObject(3),rs.getObject(4),rs.getObject(5),rs.getObject(6)));
+            	//rs = st.executeQuery("DESCRIBE "+tableName);
+            	rs2 = st.executeQuery("SELECT  COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,COLUMN_KEY,COLUMN_DEFAULT,EXTRA,COLUMN_COMMENT FROM information_schema.columns WHERE TABLE_NAME = '"+tableName+"';");
+            	while (rs2.next()) {
+                    list.add(new PropertyVo(tableName,rs2.getObject(1),rs2.getObject(2),rs2.getObject(3),rs2.getObject(4),rs2.getObject(5),rs2.getObject(6),rs2.getObject(7)));
                 }
             }
             
             return UtilTool.parseProperty(list);
         } finally {
-            JDBCUtils.free(rs, st, conn);
+            JDBCUtils.free(rs1, st, conn);
+            JDBCUtils.free(rs2, st, conn);
         }
 
     }

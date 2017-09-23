@@ -39,9 +39,10 @@ public class PropertyVo {
 	 */
 	private String UpperCaseFieldCol;
 	
+	private String comment;
 	
 	public PropertyVo(String lowerCaseTableName,Object lowerCaseFieldCol, Object typeCol, Object nullCol,
-			Object keyCol, Object DefaultCol, Object extraCol) {
+			Object keyCol, Object DefaultCol, Object extraCol, Object comment) {
 		this.lowerCaseTableName = lowerCaseTableName;
 		this.lowerCaseFieldCol = lowerCaseFieldCol!=null?lowerCaseFieldCol.toString():null;
 		this.typeCol = typeCol!=null?typeCol.toString():null;
@@ -49,6 +50,7 @@ public class PropertyVo {
 		this.keyCol = keyCol!=null?keyCol.toString():null;
 		this.DefaultCol = DefaultCol;
 		this.extraCol = extraCol!=null?extraCol.toString():null;
+		this.comment = comment!=null?comment.toString():null; 
 	}
 	
 	public PropertyVo() {}
@@ -115,6 +117,14 @@ public class PropertyVo {
 
 	public void setLowerCaseFieldCol(String lowerCaseFieldCol) {
 		this.lowerCaseFieldCol = lowerCaseFieldCol;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

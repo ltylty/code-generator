@@ -12,17 +12,17 @@ public class ${className}VO {
 	
 	#foreach($_pk in $pks)
 	/**
-	 * $_pk.lowerCaseFieldCol
+	 * $_pk.comment
 	 */	
-	@ApiModelProperty
+	@ApiModelProperty(value = "$_pk.comment")
 	private $_pk.typeCol $_pk.lowerCaseFieldCol;
 
 	#end
 	#foreach($s in $propertys)
 	/**
-	 * $s.lowerCaseFieldCol
+	 * $s.comment
 	 */	
-	@ApiModelProperty
+	@ApiModelProperty(value = "$s.comment")
 	private $s.typeCol $s.lowerCaseFieldCol;
 
 	#end

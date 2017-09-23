@@ -15,7 +15,7 @@ public class ${className}PO {
 	
 	#foreach($_pk in $pks)
 	/**
-	 * $_pk.lowerCaseFieldCol
+	 * $_pk.comment
 	 */	
 	@Id
 	@Column(name="$_pk.fieldOriginal")
@@ -24,7 +24,7 @@ public class ${className}PO {
 	#end
 	#foreach($s in $propertys)
 	/**
-	 * $s.lowerCaseFieldCol
+	 * $s.comment
 	 */	
 	@Column(name="$s.fieldOriginal")
 	private $s.typeCol $s.lowerCaseFieldCol;
