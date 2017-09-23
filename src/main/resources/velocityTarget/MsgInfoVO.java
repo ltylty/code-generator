@@ -58,30 +58,6 @@ public class MsgInfoVO {
 	@ApiModelProperty(value = "内容")
 	private String body;
 
-	/**
-	 * 创建者
-	 */	
-	@ApiModelProperty(value = "创建者")
-	private String creator;
-
-	/**
-	 * 创建时间
-	 */	
-	@ApiModelProperty(value = "创建时间")
-	private java.util.Date createTime;
-
-	/**
-	 * 
-	 */	
-	@ApiModelProperty(value = "")
-	private String updator;
-
-	/**
-	 * 更新时间
-	 */	
-	@ApiModelProperty(value = "更新时间")
-	private java.util.Date updateTime;
-
 
 	 /**
 	 * @return the msgId
@@ -195,62 +171,6 @@ public class MsgInfoVO {
 	 */	
 	public void setBody(String body) {
 		this.body = body;
-	}
-
-	 /**
-	 * @return the creator
-	 */		
-	public String getCreator() {
-		return creator;
-	}
-	
-	 /**
-	 * @param creator the creator to set
-	 */	
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
-
-	 /**
-	 * @return the createTime
-	 */		
-	public java.util.Date getCreateTime() {
-		return createTime;
-	}
-	
-	 /**
-	 * @param createTime the createTime to set
-	 */	
-	public void setCreateTime(java.util.Date createTime) {
-		this.createTime = createTime;
-	}
-
-	 /**
-	 * @return the updator
-	 */		
-	public String getUpdator() {
-		return updator;
-	}
-	
-	 /**
-	 * @param updator the updator to set
-	 */	
-	public void setUpdator(String updator) {
-		this.updator = updator;
-	}
-
-	 /**
-	 * @return the updateTime
-	 */		
-	public java.util.Date getUpdateTime() {
-		return updateTime;
-	}
-	
-	 /**
-	 * @param updateTime the updateTime to set
-	 */	
-	public void setUpdateTime(java.util.Date updateTime) {
-		this.updateTime = updateTime;
 	}
 
 }

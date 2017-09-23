@@ -19,6 +19,9 @@ public class ${className}VO {
 
 	#end
 	#foreach($s in $propertys)
+	#if($s.lowerCaseFieldCol == "creator")
+       #break 
+    #end
 	/**
 	 * $s.comment
 	 */	
@@ -66,6 +69,9 @@ public class ${className}VO {
 	#end
 
 	#foreach($s in $propertys)
+	#if($s.lowerCaseFieldCol == "creator")
+	       #break 
+	#end
 
 	 /**
 	 * @return the $s.lowerCaseFieldCol

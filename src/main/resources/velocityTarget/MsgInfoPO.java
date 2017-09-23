@@ -75,7 +75,7 @@ public class MsgInfoPO {
 	private java.util.Date createTime;
 
 	/**
-	 * 
+	 * 更新者
 	 */	
 	@Column(name="updator")
 	private String updator;

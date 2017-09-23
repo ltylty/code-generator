@@ -57,7 +57,7 @@ public class MsgInfoBO {
 	private java.util.Date createTime;
 
 	/**
-	 * 
+	 * 更新者
 	 */	
 	private String updator;
 
