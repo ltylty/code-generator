@@ -75,6 +75,7 @@ public class WirteIntoFile {
 		context.put("className", tvo.getUpperCaseTableName());
 		context.put("objName", tvo.getLowerCaseTableName());
 		context.put("moudleName", moudleName);
+		context.put("path", tvo.getLowerCaseTableName().toLowerCase());
 
 		context.put("isMulti", tvo.isMulti());
 		if (tvo.isMulti()) {
