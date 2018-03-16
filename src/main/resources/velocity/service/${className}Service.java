@@ -110,9 +110,9 @@ public class ${className}Service extends ServiceAdapter<${className}BO, ${classN
 	 *
 	 * @param ${objName}Id the teaching program id
 	 */
-	public void remove(String ${objName}Id) {
+	public void remove(String id) {
 		Example example = new Example(${className}PO.class);
-		example.createCriteria().andEqualTo("${objName}Id", ${objName}Id);
+		// TODO 设置id
 		${objName}DAO.deleteByExample(example);
 	}
 	

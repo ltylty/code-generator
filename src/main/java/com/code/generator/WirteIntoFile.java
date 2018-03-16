@@ -113,7 +113,7 @@ public class WirteIntoFile {
 		initContext();
 		try {
 			createFilePath(velocityTarget);
-			createTargetFiles(velocity , velocityTarget , "", true);
+			createTargetFiles(velocity , velocityTarget);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -215,69 +215,69 @@ public class WirteIntoFile {
 
 	}
 
-	public static void createTargetFiles(String sourcePath, String targetPath,
-			String filePath, boolean flag) {
-		File file;
-		StringWriter writer = null;
-		if (flag) {
-			file = new File(sourcePath);
-		} else {
-			file = new File(filePath);
-		}
-
+	public static void createTargetFiles(String sourcePath, String targetPath) {
+		File file = new File(sourcePath);
 		if (file.exists() && file.isDirectory()) {
 			File[] files = file.listFiles();
 			for (File f : files) {
+				if(f.isDirectory()) {
+					createTargetFiles(f.getAbsolutePath(), targetPath+f.getAbsolutePath().replace(sourcePath, ""));
+				} else {
+					createTargetFiles(f, sourcePath, targetPath);
+				}
+			}
+		}
+	}
+	
+	public static void createTargetFiles(File f,String sourcePath, String targetPath) {
+		StringWriter writer = null;
+		try {
+			Boolean isMulti = (Boolean)context.get("isMulti");						
+			if(!isMulti && f.getName().startsWith("${className}PK")) {
+				return;
+			}
+			
+			VelocityEngine ve = new VelocityEngine();
+			Properties properties = new Properties();
+			//properties.setProperty("directive.foreach.counter.initial.value", "0");
+			properties.setProperty("resource.loader", "srl");
+			properties.setProperty("srl.resource.loader.class", "com.code.generator.util.MyResourceLoader");
+			ve.init(properties);
+			//ve.init("velocity.properties");
+			Template fileContextTemplate = ve.getTemplate(readFile(
+					f).toString(), "utf-8");
+			writer = new StringWriter();
+			// 将环境数据转化输出
+			fileContextTemplate.merge(context, writer);
+			writer.close();
+			String fileContext = writer.toString();
+			VelocityEngine veFileName = new VelocityEngine();
+
+			veFileName.init(properties);
+
+			String filePathStr = f.getPath().replace(sourcePath,targetPath);
+			filePathStr = filePathStr.replaceAll("/", "SWPC007");
+			filePathStr = filePathStr.replaceAll("\\\\", "SWPC007");
+			Template fileNameTemplate = veFileName.getTemplate(
+					filePathStr, "utf-8");
+
+			writer = new StringWriter();
+			// 将环境数据转化输出
+			fileNameTemplate.merge(context, writer);
+			writer.close();
+
+			filePathStr = writer.toString();
+
+			createFile(filePathStr.replaceAll("SWPC007", "\\\\"),
+					fileContext);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null) {
 				try {
-					Boolean isMulti = (Boolean)context.get("isMulti");						
-					if(!isMulti && f.getName().startsWith("${className}PK"))
-					{
-						continue;
-					}
-					
-					VelocityEngine ve = new VelocityEngine();
-					Properties properties = new Properties();
-					//properties.setProperty("directive.foreach.counter.initial.value", "0");
-					properties.setProperty("resource.loader", "srl");
-					properties.setProperty("srl.resource.loader.class", "com.code.generator.util.MyResourceLoader");
-					ve.init(properties);
-					//ve.init("velocity.properties");
-					Template fileContextTemplate = ve.getTemplate(readFile(
-							f).toString(), "utf-8");
-					writer = new StringWriter();
-					// 将环境数据转化输出
-					fileContextTemplate.merge(context, writer);
 					writer.close();
-					String fileContext = writer.toString();
-					VelocityEngine veFileName = new VelocityEngine();
-
-					veFileName.init(properties);
-
-					String filePathStr = f.getPath().replace(sourcePath,targetPath);
-					filePathStr = filePathStr.replaceAll("/", "SWPC007");
-					filePathStr = filePathStr.replaceAll("\\\\", "SWPC007");
-					Template fileNameTemplate = veFileName.getTemplate(
-							filePathStr, "utf-8");
-
-					writer = new StringWriter();
-					// 将环境数据转化输出
-					fileNameTemplate.merge(context, writer);
-					writer.close();
-
-					filePathStr = writer.toString();
-
-					createFile(filePathStr.replaceAll("SWPC007", "\\\\"),
-							fileContext);
-				} catch (Exception e) {
+				} catch (IOException e) {
 					e.printStackTrace();
-				} finally {
-					if (writer != null) {
-						try {
-							writer.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
 				}
 			}
 		}

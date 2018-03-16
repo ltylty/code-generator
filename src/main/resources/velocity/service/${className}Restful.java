@@ -74,9 +74,9 @@ public class ${className}Restful extends ServiceControllerAdapter<${className}BO
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	public Response<Boolean> remove(
 			@ApiParam(required = true, value = "主键标识") 
-			@RequestParam(required = true, value = "${objName}Id")
-			@NotEmpty String ${objName}Id) {
-		${objName}Service.remove(${objName}Id);
+			@RequestParam(required = true, value = "id")
+			@NotEmpty String id) {
+		${objName}Service.remove(id);
 		return responseTemplate.format(true);
 	}  
 }

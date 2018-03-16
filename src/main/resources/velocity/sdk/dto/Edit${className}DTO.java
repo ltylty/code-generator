@@ -1,20 +1,16 @@
-package com.enableets.edu.${moudleName}.microservice.vo;
+package com.enableets.edu.sdk.${moudleName}.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author toy_liu@enable-ets.com
  * ${currDate}
  */
-@ApiModel
-public class ${className}VO {
+public class Edit${className}DTO {
 	
 	#foreach($_pk in $pks)
 	/**
 	 * $_pk.comment
 	 */	
-	@ApiModelProperty(value = "$_pk.comment")
 	private $_pk.typeCol $_pk.lowerCaseFieldCol;
 
 	#end
@@ -25,7 +21,6 @@ public class ${className}VO {
 	/**
 	 * $s.comment
 	 */	
-	@ApiModelProperty(value = "$s.comment")
 	private $s.typeCol $s.lowerCaseFieldCol;
 
 	#end
