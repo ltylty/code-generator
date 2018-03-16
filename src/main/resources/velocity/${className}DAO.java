@@ -7,6 +7,6 @@ import com.enableets.edu.${moudleName}.framework.po.${className}PO;
  * @author toy_liu@enable-ets.com
  * ${currDate}
  */
-public interface ${className}Dao extends BaseDao<${className}PO> {
+public interface ${className}DAO extends BaseDao<${className}PO> {
 	
 }
