@@ -44,6 +44,11 @@ public class CommonVars {
 	public static String tableName ;
 	
 	/**
+	 * 库名称
+	 */
+	public static String databaseName;
+	
+	/**
 	 * 生成Java文件的绝对路径
 	 */
 	public static String velocityTarget ;
@@ -98,6 +103,7 @@ public class CommonVars {
 		String filePath = Class.class.getClass().getResource("/").getPath() + "config.properties" ;
 		ProUtils.readProperties(filePath ) ;
 		cache = ProUtils.cache ;
+		databaseName = cache.get("databaseName");
 		tableName = cache.get("tableName");
 		DATABASE_URL = cache.get("DATABASE_URL") ;
 		DATABASE_USER = cache.get("DATABASE_USER");

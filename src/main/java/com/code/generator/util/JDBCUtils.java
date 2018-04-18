@@ -16,6 +16,7 @@ public final class JDBCUtils {
     private static String url = CommonVars.DATABASE_URL;
     private static String user = CommonVars.DATABASE_USER;
     private static String password = CommonVars.DATABASE_PASSWORD;
+    private static String databaseName = CommonVars.databaseName;
 
 
     public static Connection getConnection() throws SQLException {
@@ -53,14 +54,14 @@ public final class JDBCUtils {
         try {
             conn = JDBCUtils.getConnection();
             st = conn.createStatement();
-            rs1 = st.executeQuery("SELECT table_name FROM information_schema.TABLES WHERE table_name ='"+tableName+"';");
+            rs1 = st.executeQuery("SELECT table_name FROM information_schema.TABLES WHERE table_name ='"+tableName+"' AND TABLE_SCHEMA = '"+databaseName+"';");
             List<PropertyVo> list =null;
             if(rs1.next()){
             	if(list == null){
             		list = new ArrayList<PropertyVo>();
             	}
             	//rs = st.executeQuery("DESCRIBE "+tableName);
-            	rs2 = st.executeQuery("SELECT  COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,COLUMN_KEY,COLUMN_DEFAULT,EXTRA,COLUMN_COMMENT FROM information_schema.columns WHERE TABLE_NAME = '"+tableName+"';");
+            	rs2 = st.executeQuery("SELECT  COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,COLUMN_KEY,COLUMN_DEFAULT,EXTRA,COLUMN_COMMENT FROM information_schema.columns WHERE TABLE_NAME = '"+tableName+"'  AND TABLE_SCHEMA = '"+databaseName+"';");
             	while (rs2.next()) {
                     list.add(new PropertyVo(tableName,rs2.getObject(1),rs2.getObject(2),rs2.getObject(3),rs2.getObject(4),rs2.getObject(5),rs2.getObject(6),rs2.getObject(7)));
                 }
