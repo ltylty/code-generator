@@ -5,7 +5,7 @@ package com.enableets.edu.sdk.${moudleName}.dto;
  * @author toy_liu@enable-ets.com
  * ${currDate}
  */
-public class Query${className}ResultVO {
+public class Query${className}ResultDTO {
 	
 	#foreach($_pk in $pks)
 	/**
