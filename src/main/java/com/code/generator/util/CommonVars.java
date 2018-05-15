@@ -105,7 +105,7 @@ public class CommonVars {
 		cache = ProUtils.cache ;
 		databaseName = cache.get("databaseName");
 		tableName = cache.get("tableName");
-		DATABASE_URL = cache.get("DATABASE_URL") ;
+		DATABASE_URL = cache.get("DATABASE_URL") + databaseName + "?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true";
 		DATABASE_USER = cache.get("DATABASE_USER");
 		DATABASE_PASSWORD = cache.get("DATABASE_PASSWORD");
 		DRIVER_MANAGER_NAME = cache.get("DRIVER_MANAGER_NAME");
